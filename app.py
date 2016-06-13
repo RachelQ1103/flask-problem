@@ -38,6 +38,24 @@ def problem_new():
     return redirect(url_for('problem'))
 
 
+# /problem/update
+# {
+#   'id': 1
+#   'status': true/false
+# }
+@app.route('/problem/update', methods=['POST'])
+def problem_update():
+    form = request.form
+    id = form.get('id', '')
+    status = form.get('status', '')
+
+    p = Problem.query.filter_by(id=id).first()
+    p.is_solved = status
+    p.save()
+    print(p, p.status)
+    return redirect(url_for('problems'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
