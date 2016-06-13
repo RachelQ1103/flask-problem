@@ -20,7 +20,7 @@ class Problem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     link = db.Column(db.String())
     timestamp = db.Column(db.DateTime(timezone=True), default=sql.func.now())
-    is_solved = db.Column(db.Boolean, default=False)
+    status = db.Column(db.Boolean, default=False)
 
     def __init__(self, form):
         self.link = form.get('link', '')
@@ -31,6 +31,15 @@ class Problem(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+
+    def table_row(self):
+        tr = {
+            'link': '<a href="{}">{}</a>'.format(self.link, self.link),
+            'time': self.timestamp,
+            'status': self.status,
+        }
+        return tr
+
 
 
 def backup_db():
