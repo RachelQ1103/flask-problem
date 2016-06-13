@@ -1,0 +1,30 @@
+1. problem-model 添加字段:
+    id
+    link
+    timestamp
+    save()
+
+
+2. app-路由:
+
+    提交问题:
+        index           /               --> redirect
+        problem         /problem        --> 渲染 new_problem.html
+        problem_new     problem/new     --> POST: p = Problem(form); redirect
+
+    查看问题列表
+        problems        /problem/list   --> 渲染 problems.html
+
+
+3. HTML 页面:
+    提交问题.html --> 创建
+    问题列表.html --> 创建
+
+
+4. problem-model 添加字段:
+    is_solved, (default = False)
+
+
+5. HTML 页面:
+    问题列表.html --> 显示 time & is_solved
+

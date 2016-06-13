@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>new problem</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <style type="text/css">
+        .center {
+            text-align: center;
+        }
+
+        #id-text-code {
+            /*width: 60%;*/
+            max-width: 1000px;
+            min-width: 60%;
+            height: 60%;
+        }
+
+        #id-button-submit {
+            margin-top: 10px;
+            /*width: 60%;*/
+            min-width: 60%;
+            max-width: 1000px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+<div class="center">
+    <h1>问题</h1>
+    <form action="/problem/new" method="POST">
+        <textarea id="id-text-code" class="pure-input-1-2" placeholder="请输入代码链接..." name="link"></textarea>
+        <input id="id-button-submit" class="pure-button pure-button-primary" type="submit" value="提交">
+    </form>
+</div>
+</body>
+</html>
