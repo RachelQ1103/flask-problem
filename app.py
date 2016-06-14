@@ -19,7 +19,11 @@ def index():
 def problems():
     problem_list = Problem.query.all()
     # print('问题列表: ', problem_list)
-    return render_template('problems.html', problems=problem_list)
+    tr_list = []
+    for p in problem_list:
+        tr = p.table_row()
+        tr_list.append(tr)
+    return render_template('problems.html', problems=tr_list)
 
 
 @app.route('/problem')
@@ -45,14 +49,14 @@ def problem_new():
 # }
 @app.route('/problem/update', methods=['POST'])
 def problem_update():
-    form = request.form
+    form = request.form[0]
     id = form.get('id', '')
     status = form.get('status', '')
 
     p = Problem.query.filter_by(id=id).first()
-    p.is_solved = status
+    p.solved = status
     p.save()
-    print(p, p.status)
+    print(p, p.status())
     return redirect(url_for('problems'))
 
 

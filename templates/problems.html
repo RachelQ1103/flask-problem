@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Problems</title>
-    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.test').on('click', function() {
+                var checkedStatus = $('input[name="status"]').is(':checked');
+                alert(checkedStatus);
+
+                var checkedID = $('input:checked').val();
+                alert(checkedID);
+
+                var checkedProblem = {
+                    id: checkedID,
+                    status: checkedStatus
+                };
+
+                var problem = $.post('/problem/update', checkedProblem);
+
+            });
+        });
+    </script>
 </head>
 <body>
-    <table class="problem_table">
+    <table>
         <caption>问题列表</caption>
         <thead>
             <tr>
@@ -21,12 +40,14 @@
             {%  for p in problems %}
                 <tr>
                     <td>{{ p.link }}</td>
-                    <td>{{ p.timestamp }}</td>
-                    <td>{{ p.status }}</td>
+                    <td>{{ p.time }}</td>
+                    <td>
+                        <label><input type="checkbox" value="{{ p.id }}" name="status">{{ p.status }}</label>
+                        <button class="test" value="提交"></button>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-
 </body>
 </html>

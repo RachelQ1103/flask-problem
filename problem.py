@@ -20,7 +20,7 @@ class Problem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     link = db.Column(db.String())
     timestamp = db.Column(db.DateTime(timezone=True), default=sql.func.now())
-    status = db.Column(db.Boolean, default=False)
+    solved = db.Column(db.Boolean, default=False)
 
     def __init__(self, form):
         self.link = form.get('link', '')
@@ -32,11 +32,18 @@ class Problem(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def status(self):
+        if self.solved:
+            return '已解决'
+        else:
+            return '未解决'
+
     def table_row(self):
         tr = {
+            'id': self.id,
             'link': '<a href="{}">{}</a>'.format(self.link, self.link),
             'time': self.timestamp,
-            'status': self.status,
+            'status': self.status(),
         }
         return tr
 
